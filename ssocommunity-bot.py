@@ -5,6 +5,7 @@ import os
 TOKEN = os.getenv('DISCORD_BOT_TOKEN')
 
 GUILD_ID = os.getenv('GUILD_ID')
+ROLE_ID = os.getenv('ROLE_ID')
 
 TRIGGER_WORD_UP = '@Servers Up'  # Trigger-Text für Server online
 TRIGGER_WORD_CLOSED = 'closed'  # Trigger-Text für Server offline
@@ -66,7 +67,7 @@ async def on_message(message):
             target_channel = client.get_channel(int(TARGET_CHANNEL_ID))
             if target_channel:
                 print(f"Nachricht wird in den Ziel-Kanal {target_channel.name} gesendet.")
-                await target_channel.send(f"# 🚀 Server sind wieder offen\nDie Wartungsarbeiten sind beendet und die Server wieder geöffnet!")
+                await target_channel.send(f"# 🚀 Server sind wieder offen\nDie Wartungsarbeiten sind beendet und die Server wieder geöffnet!\n<@&{ROLE_ID}>")
                 last_sent_time = current_time  # Zeit des letzten Sendens speichern
         
         # Prüfen, ob das Triggerwort für "closed" enthalten ist
@@ -75,7 +76,7 @@ async def on_message(message):
             target_channel = client.get_channel(int(TARGET_CHANNEL_ID))
             if target_channel:
                 print(f"Nachricht wird in den Ziel-Kanal {target_channel.name} gesendet.")
-                await target_channel.send(f"# :warning: Server sind derzeit geschlossen\nAktuell sind die Server wegen Wartungsarbeiten geschlossen. Sobald sie wieder offen sind, erfährst du das hier!\nAktuellen Serverstatus überprüfen: https://www.starstable.com/de/server-status")
+                await target_channel.send(f"# :warning: Server sind derzeit geschlossen\nAktuell sind die Server wegen Wartungsarbeiten geschlossen. Sobald sie wieder offen sind, erfährst du das hier!\nAktuellen Serverstatus überprüfen: https://www.starstable.com/de/server-status\n<@&{ROLE_ID}>")
                 last_sent_time = current_time  # Zeit des letzten Sendens speichern
 
         else:
