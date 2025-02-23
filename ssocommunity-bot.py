@@ -1,9 +1,10 @@
 import discord
 import time
+import os
 
 TRIGGER_WORD_UP = '@Servers Up'  # Trigger-Text für Server online
 TRIGGER_WORD_CLOSED = 'closed'  # Trigger-Text für Server offline
-
+TOKEN = os.getenv('DISCORD_BOT_TOKEN')
 
 # 🔹 Intents aktivieren
 intents = discord.Intents.default()
