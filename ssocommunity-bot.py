@@ -1,4 +1,6 @@
 import discord
+from keep_alive import run  # Importiere den Webserver
+import threading  # Hier das threading-Modul importieren
 import time
 import os
 
@@ -21,6 +23,10 @@ intents.message_content = True
 
 client = discord.Client(intents=intents)
 
+
+# Starte den Webserver in einem neuen Thread
+t = threading.Thread(target=run)
+t.start()
 
 # Variable zur Vermeidung von Spam: Speichert den Zeitpunkt der letzten Nachricht
 last_sent_time = 0
