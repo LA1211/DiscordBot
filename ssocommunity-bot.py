@@ -10,7 +10,10 @@ GUILD_ID = os.getenv('GUILD_ID')
 ROLE_ID = os.getenv('ROLE_ID')
 
 TRIGGER_WORD_UP = '@Servers Up'  # Trigger-Text für Server online
-TRIGGER_WORD_CLOSED = 'All other servers are now closed'  # Trigger-Text für Server offline
+TRIGGER_WORDS_CLOSED = [
+    "All other servers are now closed",
+    "all servers are now closed"
+]  # Trigger-Text für Server offline
 
 ANNOUNCEMENT_CHANNEL_ID = os.getenv('ANNOUNCEMENT_CHANNEL_ID')
 TARGET_CHANNEL_ID = os.getenv('TARGET_CHANNEL_ID')
@@ -77,13 +80,18 @@ async def on_message(message):
                 last_sent_time = current_time  # Zeit des letzten Sendens speichern
         
         # Prüfen, ob das Triggerwort für "closed" enthalten ist
-        elif TRIGGER_WORD_CLOSED in message.content:
-            print(f"Triggerwort '{TRIGGER_WORD_CLOSED}' gefunden!")
+        elif any(trigger in message.content for trigger in TRIGGER_WORDS_CLOSED):
+            print(f"Triggerwort für 'closed' gefunden!")
             target_channel = client.get_channel(int(TARGET_CHANNEL_ID))
             if target_channel:
                 print(f"Nachricht wird in den Ziel-Kanal {target_channel.name} gesendet.")
-                await target_channel.send(f"# :warning: Server sind derzeit geschlossen\nAktuell sind die Server wegen Wartungsarbeiten geschlossen. Sobald sie wieder offen sind, erfährst du das hier!\nAktuellen Serverstatus überprüfen: https://www.starstable.com/de/server-status\n<@&{ROLE_ID}>")
-                last_sent_time = current_time  # Zeit des letzten Sendens speichern
+                await target_channel.send(
+                    f"# :warning: Server sind derzeit geschlossen\n"
+                    f"Aktuell sind die Server wegen Wartungsarbeiten geschlossen. Sobald sie wieder offen sind, erfährst du das hier!\n"
+                    f"Aktuellen Serverstatus überprüfen: https://www.starstable.com/de/server-status\n"
+                    f"<@&{ROLE_ID}>"
+                )
+                last_sent_time = current_time
 
         else:
             print(f"Kein relevantes Triggerwort in der Nachricht gefunden.")
