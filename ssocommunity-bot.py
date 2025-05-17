@@ -12,7 +12,7 @@ ROLE_ID = os.getenv('ROLE_ID')
 TRIGGER_WORD_UP = '@Servers Up'  # Trigger-Text für Server online
 TRIGGER_WORDS_CLOSED = [
     "All other servers are now closed",
-    "all servers are now closed"
+    "Servers are now closed"
 ]  # Trigger-Text für Server offline
 
 ANNOUNCEMENT_CHANNEL_ID = os.getenv('ANNOUNCEMENT_CHANNEL_ID')
