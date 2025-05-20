@@ -31,6 +31,7 @@ client = discord.Client(intents=intents)
 t = threading.Thread(target=run)
 t.start()
 
+
 # Variable zur Vermeidung von Spam: Speichert den Zeitpunkt der letzten Nachricht
 last_sent_time = 0
 cooldown_time = 10  # Zeit in Sekunden, um doppelte Nachrichten zu verhindern
