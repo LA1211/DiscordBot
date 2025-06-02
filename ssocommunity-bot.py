@@ -65,7 +65,7 @@ async def on_message(message):
         if isinstance(message.channel, discord.TextChannel) and message.channel.type == discord.ChannelType.news:
             print(f"Es handelt sich um eine Nachricht aus einem Announcement-Kanal!")
 
-        # Überprüfen, ob die Nachricht im Cooldown ist
+        # Prüfen, ob die Nachricht im Cooldown ist
         current_time = time.time()
         if current_time - last_sent_time < cooldown_time:
             print(f"Zu schnell! Der Bot wartet noch auf Cooldown.")
